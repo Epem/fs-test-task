@@ -11,6 +11,8 @@ export interface FiltersContextType {
     capacity: Capacity | '';
     energyClass: EnergyClass | '';
     feature: Features | '';
+    page : string,
+    limit : string
   };
   setFilters: (filters: FiltersContextType['filters']) => void;
 }
@@ -23,6 +25,8 @@ const FiltersContext = createContext<FiltersContextType>({
     capacity: '',
     energyClass: '',
     feature: '',
+    page : '1',
+    limit: '6'
   },
   setFilters: () => null,
 });
@@ -34,6 +38,8 @@ export const FiltersProvider = ({ children }: PropsWithChildren) => {
     capacity: '',
     energyClass: '',
     feature: '',
+    page: '1',
+    limit: '6'
   });
 
   const value = useMemo(

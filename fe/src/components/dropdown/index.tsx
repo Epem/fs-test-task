@@ -6,6 +6,7 @@ import { ChevronDown } from 'react-feather';
 export interface DropdownOption {
   name: FiltersContextType['filters'][keyof FiltersContextType['filters']];
   title?: string;
+  _id?: string;
 }
 
 interface DropdownProps {
@@ -19,7 +20,7 @@ export const Dropdown = ({ options, filter }: DropdownProps) => {
 
   const handleChange = (option: DropdownOption) => {
     setSelected(option);
-    setFilters({ ...filters, [filter]: option.name });
+      setFilters({ ...filters, [filter]: option.name });
   };
 
   const selectedTitle = selected.title || selected.name || 'Pokaż wszystkie';
@@ -50,7 +51,7 @@ export const Dropdown = ({ options, filter }: DropdownProps) => {
               >
                 Wszystkie
               </Listbox.Option>
-              {options.map((option) => (
+              {options?.map((option) => (
                 <Listbox.Option
                   key={option.name}
                   value={option}

@@ -1,0 +1,27 @@
+[
+    {
+        "url": "/api/processorder",
+        "method": "POST",
+        "controller":  "processorder"
+    },
+    {
+        "url": "/api/list",
+        "method": "POST",
+        "controller":  "list"
+    },
+    {
+        "url": "/api/status",
+        "method": "GET",
+        "controller": "status"
+    },
+    {
+        "url": "/api/list",
+        "method": "GET",
+        "controller":  "list"
+    },
+    {
+        "url": "/api/features",
+        "method": "POST",
+        "controller":  "features"
+    }
+]

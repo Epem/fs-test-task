@@ -8,13 +8,15 @@ import svgrPlugin from 'vite-plugin-svgr';
 export default defineConfig({
   envDir: './env',
   plugins: [react(), tsconfigPaths(), svgrPlugin()],
-  /* If proxy is needed
   server: {
     proxy: {
-      "/api": "localhost:8080"
+      "/api": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+        secure: false,
+      }
     }
   },
-  */
   build: {
     sourcemap: true,
   },

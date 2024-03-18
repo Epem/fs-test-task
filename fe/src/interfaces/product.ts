@@ -1,12 +1,9 @@
-export type EnergyClass = 'A' | 'B' | 'C';
 
-export type Capacity = 8 | 9 | 10.5;
+export type EnergyClass = string;
 
-export type Features =
-  | 'Drzwi AddWash™'
-  | 'Panel AI Control'
-  | 'Silnik inwerterowy'
-  | 'Wyświetlacz elektroniczny';
+export type Capacity = string;
+
+export type Features = string;
 
 export interface IProduct {
   image: string;

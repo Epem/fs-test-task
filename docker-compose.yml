@@ -1,2 +1,69 @@
-version: '3'
-# your services for the task
+version: '3.7'
+
+services:
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
+    container_name: fe-test-ivan-redis
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+  api:
+    restart: on-failure
+    container_name: fe-test-ivan-api
+    build:
+      context: './api/'
+      args:
+        - NODE_ENV=production
+      dockerfile: .Dockerfile
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - '3000:3000'
+    env_file: ./api/.env
+    links:
+      - redis
+      - mongo
+    depends_on:
+      - redis
+      - mongo
+  nginx:
+    restart: on-failure
+    container_name: fe-test-ivan-nginx
+    build:
+      context: './nginx/'
+      dockerfile: .Dockerfile
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - '80:80'
+    depends_on:
+      - api
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/error.log:/etc/nginx/error_log.log
+      - ./fe/dist:/usr/site
+    env_file: ./nginx/.env
+    links: 
+      - api
+  mongo:
+    image: 'mongo:latest'
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - "27017:27017"
+    container_name: fe-test-ivan-mongo
+    volumes: 
+      - ./mongo/data:/data/db
+      - ./mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    environment:  
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: Y72mXGKzD0J6fhg4
