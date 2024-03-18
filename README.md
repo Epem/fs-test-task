@@ -1,22 +1,22 @@
 # FS-TASK
-
+```
 Project structure:
 api - api service
 fe - frontend application
 mongo - mongo init data, and we store database in mongo/data folder after run
 nginx - powerful optimized proxy for serving static and api, enabled caching in redis, and pagespeed optimization.
 docker-compose.yml - dockerised whole project.
-
+```
 
 ## INSTALLATION
 
 copy env.example to .env in api, and nginx folders, in this files you can find configs.
 
-```cd api
+```
+cd api
 npm i
 
 cd ../fe
-
 npm i
 ```
 
